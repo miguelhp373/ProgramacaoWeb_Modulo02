@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Verificador de Peso</title>
+        <link rel="stylesheet" href="styles/index.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="content">
+            <h1>Verifique Seu Peso</h1>
+            <hr/>
+            <h:form class="form">
+                <label for="input-height">Altura</label>
+            <p:inputText value="#{calcularPeso.height}" class="input-height"/>
+            <br/>
+            <label for="input-Peso">Sexo</label>
+            <p:selectOneRadio value="#{calcularPeso.sexo}">
+                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                <f:selectItem itemLabel="Feminino" itemValue="F"/>
+            </p:selectOneRadio>
+            
+            <div class="buttons">
+                <p:commandButton class="btn-submit" value="Calcular" action="#{calcularPeso.calcular()}" update="@form"/>
+                <p:commandButton class="btn-submit" value="Limpar" action="#{calcularPeso.limpar()}" update="@form"/>
+            </div>
+            <br/>
+            <div class="result">
+                <h2>Resultado</h2>
+                <p:outputLabel value="#{calcularPeso.msg}"/>
+            </div>
+            </h:form>
+            
+        </div>
+        </div>
+    </h:body>
+</html>
+
