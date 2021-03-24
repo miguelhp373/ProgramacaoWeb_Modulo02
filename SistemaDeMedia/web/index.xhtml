@@ -7,6 +7,18 @@
     <h:head>
         <title>Sistemas De Notas Escolar</title>
     </h:head>
+    <style>
+         .btn-clean, .btn-send{
+            border: 3px solid white !important;
+        }
+        .btn-clean{
+            margin-left: 20px !important;
+        }
+        .btn-send{
+            margin-right:20px !important;
+            margin-left:50px !important;
+        }
+    </style>
     <h:body>
         <h:form>
             <p:fieldset legend="Formulario Aluno">
@@ -24,10 +36,10 @@
                   
             <br></br>  
                 
-            <fieldset>
-                <p:commandButton value="Enviar" action="#{systemJobs.calcular()}" update="@form"/>
-                <p:commandButton value="Novo" action="#{systemJobs.limpar()}" update="@form"/>
-            </fieldset>
+            <p:fieldset>
+                <p:commandButton value="Enviar" class='btn-send'  action="#{systemJobs.calcular()}" update="@form"/>
+                <p:commandButton value="Novo" class='btn-clean' action="#{systemJobs.limpar()}" update="@form"/>
+            </p:fieldset>
                 <br></br>    
                 <p:fieldset>
                     <p:outputLabel value="#{systemJobs.msg}" />
