@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Salário Líquido</title>
+    </h:head>
+    <h:body>
+        <link rel="stylesheet" type="text/css" href="css/estilos.css" media="screen"></link>
+        <h:form>
+            <p:panelGrid columns="3" styleClass="semBorda">
+                <f:facet name="header">
+                    <p:graphicImage library="images" name="bannerSalario2.png" width="80%"/>
+                </f:facet>
+
+                <p:card style="width: 30em; height: 36em">
+                    <f:facet name="title">
+                        Salário
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Composição do salário mensal
+                    </f:facet>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Salário Base" />
+                        <p:inputNumber value="#{calculos.salariobase}" symbol="R$ " symbolPosition="p" 
+                                       decimalSeparator="," thousandSeparator="." />
+                        
+                        <p:outputLabel value="Adicionais" />
+                        <p:inputNumber value="#{calculos.adicionais}" symbol="R$ " symbolPosition="p" 
+                                       decimalSeparator="," thousandSeparator="." />
+                        
+                        <p:outputLabel value="Horas Extras" />
+                        <p:inputNumber value="#{calculos.horasextras}" symbol="R$ " symbolPosition="p" 
+                                       decimalSeparator="," thousandSeparator="." />
+                        
+                        <p:outputLabel value="Outros" />
+                        <p:inputNumber value="#{calculos.outros}" symbol="R$ " symbolPosition="p" 
+                                       decimalSeparator="," thousandSeparator="." />
+                        
+                        <h:outputLabel value="Salário Bruto" styleClass="rotulo_destaque" />
+                        <h:outputLabel value="#{calculos.salariobruto}" styleClass="rotulo_destaque">
+                            <f:convertNumber pattern="R$ #,##0.00"/>
+                        </h:outputLabel>
+                        
+                        <p:outputLabel value="Dependentes" />
+                        <p:inputNumber value="#{calculos.dependentes}" decimalPlaces="0" />
+                        
+                    </p:panelGrid>
+                    
+                    <f:facet name="footer">
+                        <center>
+                        <p:commandButton value="Calcular" action="#{calculos.calcular()}" update="@form"
+                                         styleClass="rounded-button" style="margin-right: 20px"></p:commandButton>
+                        
+                        <p:commandButton value="Limpar" action="#{calculos.limpar()}" update="@form"
+                                         styleClass="rounded-button ui-button-success"></p:commandButton>
+                        </center>
+                    </f:facet>
+                </p:card>
+                
+                <p:card style="width: 35em; height: 36em">
+                    <f:facet name="title">
+                        Gráfico do Salário Bruto
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Gráfico da composição do salário mensal
+                    </f:facet>
+                    <p:pieChart 
+                        model="#{calculos.pieModel}"
+                        style="width: 100%; height: 25em"
+                        />
+                </p:card>
+                
+                <p:card style="width: 30em; height: 36em">
+                    <f:facet name="title">
+                        Descontos
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Descontos relativos ao INSS e ao IR
+                    </f:facet>
+                    <p:panelGrid columns="2">
+                                                
+                        <h:outputLabel value="Faixa INSS"  />
+                        <h:outputLabel value="#{calculos.faixaInss}" styleClass="rotulo_desconto">
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Valor INSS" />
+                        <h:outputLabel value="#{calculos.inss}" styleClass="rotulo_desconto">
+                            <f:convertNumber pattern="R$ #,##0.00"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Faixa Imposto de Renda"  />
+                        <h:outputLabel value="#{calculos.faixaIR}" styleClass="rotulo_desconto">
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Valor Imposto de Renda"  />
+                        <h:outputLabel value="#{calculos.valorIR}" styleClass="rotulo_desconto">
+                            <f:convertNumber pattern="R$ #,##0.00"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Total de Descontos"  />
+                        <h:outputLabel value="#{calculos.totaldescontos}" styleClass="rotulo_desconto_total">
+                            <f:convertNumber pattern="R$ #,##0.00"/>
+                        </h:outputLabel>
+                        
+                    </p:panelGrid>
+                    
+                    
+                </p:card>
+                
+                <f:facet name="footer">
+                    <center>
+                        <p:outputLabel value="Salário Líquido:" style="font-size: 18pt"/>
+                    </center>
+                    <center>
+                        <h:outputLabel value="#{calculos.salarioliquido}" styleClass="rotulo_resposta">
+                            <f:convertNumber pattern="R$ #,##0.00"/> 
+                        </h:outputLabel>
+                    </center>
+                </f:facet>
+                
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

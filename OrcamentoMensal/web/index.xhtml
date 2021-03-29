@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+        <title>Orçamento Mensal</title>
+    </h:head>
+    <style>
+        td{
+            border: none !important; 
+        }
+    </style>
+    <h:body>
+        <h:form>
+            
+            <p:panelGrid columns="3">
+                
+                <p:card style="width: 30em; height: auto">
+                    <f:facet name="title">Renda</f:facet>
+                    <f:facet name="subtitle">Total de Renda Ganhada Mensal</f:facet>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Renda:"/>
+                        <p:inputNumber
+                            value="#{generator.renda}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                    </p:panelGrid>
+                    
+                    <hr/>
+                     <h2>Gastos Mensais</h2>
+                     <p>Todos os Gastos Mensais</p>
+                     <br/>
+                    <p:panelGrid columns="2">
+                       
+                     
+                         <p:outputLabel value="Alimentação:"/>
+                        <p:inputNumber
+                            value="#{generator.alimentacao}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                         <p:outputLabel value="Transporte:"/>
+                        <p:inputNumber
+                            value="#{generator.transporte}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                         <p:outputLabel value="Saúde:"/>
+                        <p:inputNumber
+                            value="#{generator.saude}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                         <p:outputLabel value="Moradia:"/>
+                        <p:inputNumber
+                            value="#{generator.moradia}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                         <p:outputLabel value="Compras Gerais:"/>
+                        <p:inputNumber
+                            value="#{generator.compras}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                         <p:outputLabel value="Fundo de Reserva:"/>
+                        <p:inputNumber
+                            value="#{generator.reserva}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                         <p:outputLabel value="Outros:"/>
+                        <p:inputNumber
+                            value="#{generator.outros}"
+                            symbol="R$ "
+                            symbolPosition="p" 
+                             decimalSeparator="," 
+                             thousandSeparator="." 
+                           />
+                    </p:panelGrid>
+                     <br/>
+                     <p:panelGrid columns="2">
+                         <p:commandButton value="Calcular" styleClass="rounded-button ui-button-success" action="#{generator.calcular()}"  update="@form" style="margin-left: 5rem"/>
+                         <p:commandButton  value="Limpar" styleClass="rounded-button ui-button-secondary" action="#{generator.limpar()}"  update="@form"  />
+                     </p:panelGrid>
+                </p:card>
+                
+                
+                <p:card style="width: 30em; height: 932.82px">
+                    <f:facet name="title">Gráfico de Despesas</f:facet>
+                    <f:facet name="subtitle">Total de Gastos Mensais Representados no Gráfico</f:facet>
+                    <br/>
+                   <p:pieChart
+                       model="#{generator.pieModel}"
+                        style="width: 100%; height: 50em"
+                            />
+                </p:card>
+                
+                <p:card style="width: 30em;  height: 932.82px">
+                    <f:facet name="title">Despesas</f:facet>
+                    <f:facet name="subtitle">Total de Despesas Mensal</f:facet>
+                    
+                    <p:panelGrid columns="2">
+                        
+                        <h:outputLabel value="Alimentação"  />
+                        <h:outputLabel  value="#{generator.a}">
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Transporte"  />
+                        <h:outputLabel value="#{generator.t}" >
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Saúde"  />
+                        <h:outputLabel  value="#{generator.s}">
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Moradia"  />
+                        <h:outputLabel  value="#{generator.m}">
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Compras Gerais"  />
+                        <h:outputLabel value="#{generator.c}" >
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Fundo de Reserva"  />
+                        <h:outputLabel  value="#{generator.r}">
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Outros"  />
+                        <h:outputLabel value="#{generator.o}" >
+                            <f:convertNumber pattern="0.0 %"/>
+                        </h:outputLabel>
+                        
+                        <h:outputLabel value="Total"  />
+                        <h:outputLabel value="R$#{generator.despesas}" />
+                    </p:panelGrid>
+                    <hr/>
+                   
+                        
+                    <h2>  Balanço Mensal</h2>
+                    <h:outputLabel value="R$#{generator.balanco}"   style="font-size: 3rem"  />
+
+                </p:card>
+                
+                
+                
+            </p:panelGrid>
+        
+        </h:form>
+    </h:body>
+</html>
+
