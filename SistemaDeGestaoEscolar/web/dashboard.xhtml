@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+        <h:head>
+        <title>DashBoard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet"   type="text/css" href="#{facesContext.externalContext.requestContextPath}/styles/dashboard.css"/>
+          <script src="https://kit.fontawesome.com/bb41ae50aa.js" crossorigin="anonymous"></script>
+    </h:head>
+  
+       <h:body>
+           <h:form>
+                      <header>
+            <div class="navbar-top">
+                <ul class="nav-buttons">
+                     <h1> SGE </h1>
+                     <li class="name-user"><i class="fas fa-user-alt"/>&nbsp; Bem Vindo Professor</li>
+                      <h:link outcome="index.xhtml">
+                          <li class="out-link"><i class="fas fa-sign-out-alt"/>&nbsp; Sair </li>
+                   </h:link>
+                </ul>
+            </div>
+        </header> 
+           <div class="tool-bar">
+               <p:commandButton   value="Novo" class="btn-tool-bar" action="#{alunoBean.adicionar()}" update="@form"/>
+               <p:commandButton   value="Editar" class="btn-tool-bar" action="#{alunoBean.editar()}" update="@form"/>
+               <p:commandButton  value="Apagar"     class="btn-tool-bar" action="#{alunoBean.excluir()}" update="@form"/>
+               <p:commandButton  value="Limpar"     class="btn-tool-bar" action="#{alunoBean.limpar()}" update="@form"/>
+           </div>
+            <p:messages id="messages" showDetail="true" closable="true"/>
+           <h1 style="margin-left: 20px">Cadastro de Alunos</h1>
+           <div class="register-students">
+               <p:inputText  placeholder="Código:" style="width: 100px;margin-top: 10px;" class="input-register" value="#{alunoBean.objAluno.codigo}"/> 
+               <p:inputText  placeholder="Nome:" style="width: 230px;margin-top: 10px;" class="input-register" value="#{alunoBean.objAluno.nome}"/>
+               <p:inputText  placeholder="Escola:" style="width: 230px;margin-top: 10px;" class="input-register" value="#{alunoBean.objAluno.escola}"/>
+               <p:inputText  placeholder="Série:" style="width: 230px;margin-top: 10px;" class="input-register" value="#{alunoBean.objAluno.serie}"/>
+               <p:inputText  placeholder="Matricula:" style="width: 230px;margin-top: 10px;" class="input-register" value="#{alunoBean.objAluno.matricula}"/>
+           </div>
+         
+           <div class="data-table">
+               <p:fieldset legend="Lista de Alunos Cadastrados">
+                   <p:dataTable value="#{alunoBean.listaalunos}" var="alunoweb">
+                       <p:column headerText="Código" sortBy="#{alunoweb.codigo}">
+                        <h:outputText value="#{alunoweb.codigo}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Nome" sortBy="#{alunoweb.nome}">
+                        <h:outputText value="#{alunoweb.nome}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Escola" sortBy="#{alunoweb.escola}">
+                        <h:outputText value="#{alunoweb.escola}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Série" sortBy="#{alunoweb.serie}">
+                        <h:outputText value="#{alunoweb.serie}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Matricula" sortBy="#{alunoweb.matricula}">
+                        <h:outputText value="#{alunoweb.matricula}"/>
+                    </p:column>
+                    
+                    <p:column>
+                        <p:commandButton value="Selecionar" action="#{alunoBean.selecionar(alunoweb)}" update="@form"/>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+           </div>
+           </h:form>
+    </h:body>
+</html>
